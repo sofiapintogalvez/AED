@@ -25,8 +25,7 @@ void ModSuma(int n1, int n2, int mod)
 {
     int x, rpta;
 
-    x = n1 + n2;
-    rpta = x % mod;
+    rpta = (n1 + n2) % mod;
 
     cout << n1 << " mod " << mod << " + " << n2 << " mod " << mod << endl;
     cout << rpta << " mod " << mod;
@@ -36,8 +35,7 @@ void ModResta(int n1, int n2, int mod)
 {
     int x, rpta;
 
-    x = n1 - n2;
-    rpta = x % mod;
+    rpta = (n1 - n2) % mod;
 
     if (rpta < 0)
     {
@@ -53,8 +51,7 @@ void ModMulti(int n1, int n2, int mod)
 {
     int x, rpta;
 
-    x = n1 * n2;
-    rpta = x % mod;
+    rpta = (n1 * n2) % mod;
 
     if (rpta < 0)
     {
