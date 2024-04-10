@@ -44,7 +44,7 @@ int DiasMes(int mes, int anio)
 
 void Calendario(int mes, int anio)
 {
-    string meses[] = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre" };
+    string meses[] = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
 
     int primero = Zeller(mes, anio, 1);
 
