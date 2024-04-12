@@ -4,28 +4,15 @@
 
 using namespace std;
 
-char Menu()
-{
-    char opcion;
-
-    cout << "\tCALCULADORA MODULAR\n\n";
-    cout << "Suma (s)\n";
-    cout << "Resta (r)\n";
-    cout << "Multiplicacion (m)\n";
-    cout << "Inverso (i)\n\n";
-
-    cout << "Ingrese opcion: ";
-    cin >> opcion;
-    cout << endl;
-
-    return opcion;
-}
-
 void ModSuma(int n1, int n2, int mod)
 {
-    int x, rpta;
+    int rpta = (n1 + n2) % mod;
 
-    rpta = (n1 + n2) % mod;
+    if (rpta < 0)
+    {
+        rpta *= -1;
+        rpta = mod - rpta;
+    }
 
     cout << n1 << " mod " << mod << " + " << n2 << " mod " << mod << endl;
     cout << rpta << " mod " << mod;
@@ -33,9 +20,7 @@ void ModSuma(int n1, int n2, int mod)
 
 void ModResta(int n1, int n2, int mod)
 {
-    int x, rpta;
-
-    rpta = (n1 - n2) % mod;
+    int rpta = (n1 - n2) % mod;
 
     if (rpta < 0)
     {
@@ -49,9 +34,7 @@ void ModResta(int n1, int n2, int mod)
 
 void ModMulti(int n1, int n2, int mod)
 {
-    int x, rpta;
-
-    rpta = (n1 * n2) % mod;
+    int rpta = (n1 * n2) % mod;
 
     if (rpta < 0)
     {
@@ -65,10 +48,9 @@ void ModMulti(int n1, int n2, int mod)
 
 int MCD(int x, int y)
 {
-    int temp;
     do
     {
-        temp = y;
+        int temp = y;
         y = x % y;
         x = temp;
     } while (y > 0);
@@ -95,41 +77,59 @@ void ModInv()
         }
 }
 
-int main()
+void Menu()
 {
     int num1, num2, modulo;
-    char x;
+    char opcion{ 'o' };
 
-    x = Menu();
-    cout << endl;
+    do 
+    {
+        cout << "\tCALCULADORA MODULAR\n\n";
+        cout << "Suma (s)\n";
+        cout << "Resta (r)\n";
+        cout << "Multiplicacion (m)\n";
+        cout << "Inverso (i)\n";
+        cout << "Salir (x)\n\n";
 
-    if (x == 's')
-    {
-        cout << "Primer numero: "; cin >> num1;
-        cout << "Segundo numero: "; cin >> num2;
-        cout << "Modulo: "; cin >> modulo;
-        ModSuma(num1, num2, modulo);
-    }
-    else if (x == 'r')
-    {
-        cout << "Primer numero: "; cin >> num1;
-        cout << "Segundo numero: "; cin >> num2;
-        cout << "Modulo: "; cin >> modulo;
-        ModResta(num1, num2, modulo);
-    }
-    else if (x == 'm')
-    {
-        cout << "Primer numero: "; cin >> num1;
-        cout << "Segundo numero: "; cin >> num2;
-        cout << "Modulo: "; cin >> modulo;
-        ModMulti(num1, num2, modulo);
-    }
-    else if (x == 'i')
-    {
-        ModInv();
-    }
-    else
-    {
-        cout << "No existe";
-    }
+        cout << "Ingrese opcion: ";
+        cin >> opcion;
+        cout << endl;
+
+        if (opcion == 's')
+        {
+            cout << "Primer numero: "; cin >> num1;
+            cout << "Segundo numero: "; cin >> num2;
+            cout << "Modulo: "; cin >> modulo;
+            ModSuma(num1, num2, modulo);
+            cout << "\n\n";
+        }
+        else if (opcion == 'r')
+        {
+            cout << "Primer numero: "; cin >> num1;
+            cout << "Segundo numero: "; cin >> num2;
+            cout << "Modulo: "; cin >> modulo;
+            ModResta(num1, num2, modulo);
+            cout << "\n\n";
+        }
+        else if (opcion == 'm')
+        {
+            cout << "Primer numero: "; cin >> num1;
+            cout << "Segundo numero: "; cin >> num2;
+            cout << "Modulo: "; cin >> modulo;
+            ModMulti(num1, num2, modulo);
+            cout << "\n\n";
+        }
+        else if (opcion == 'i')
+        {
+            ModInv();
+            cout << "\n\n";
+        }
+        else
+            return;
+    } while (opcion != 'x');
+}
+
+int main()
+{
+    Menu();
 }
