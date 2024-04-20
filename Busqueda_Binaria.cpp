@@ -27,13 +27,19 @@ bool BinarySearch(int* ini, int* fin, int*& pos, int key)
 int main()
 {
     int A[9] = { 1,2,3,5,7,20,23,25,35 };
-    int* p, n;
+    int* p, n, pp;
 
     cout << "Ingrese numero a buscar: ";
     cin >> n;
 
     if (BinarySearch(A, A + 8, p, n))
-        cout << "\nEl numero " << *p << " si esta en el array\n";
+    {
+        for (int* i = A; i <= p; i++)
+            pp++;
+        
+        cout << "\nEl numero " << *p << " si esta en el array en la posicion " << pp << endl;
+    }
+        
     else
         cout << "\nEl numero no se encuentra en el array";
 }
