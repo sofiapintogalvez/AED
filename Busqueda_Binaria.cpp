@@ -20,14 +20,15 @@ bool BinarySearch(int* ini, int* fin, int*& pos, int key)
             ini = pos + 1;
 
         else
-            return false;
+            break;
     }
+    return false;
 }
 
 int main()
 {
     int A[9] = { 1,2,3,5,7,20,23,25,35 };
-    int* p, n, pp;
+    int* p, n, pp{ 0 };
 
     cout << "Ingrese numero a buscar: ";
     cin >> n;
