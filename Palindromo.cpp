@@ -6,6 +6,9 @@ using namespace std;
 bool Palindromo(char* C)
 {
 	char* p = C;
+
+	while (*p) p++; 
+	p--;
 	
 	while (C < p)
 	{
