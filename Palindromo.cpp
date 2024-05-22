@@ -1,4 +1,5 @@
 // Hacer funcion para determinar si una frase o palabra es palindromo con punteros
+
 #include <iostream>
 
 using namespace std;
