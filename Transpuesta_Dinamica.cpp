@@ -53,6 +53,18 @@ void print(int** A, int f, int c)
             cout << *q << " ";
         cout << endl;
     }
+    cout << endl;
+}
+
+void Liberar(int** A, int** At, int f, int c)
+{
+    for (int** p = A; p < A + f; p++)
+        delete[] * p;
+    delete[] A;
+
+    for (int** p = At; p < At + c; p++)
+        delete[] * p;
+    delete[] At;
 }
 
 int main()
@@ -61,22 +73,15 @@ int main()
 
     cout << "Fila: "; cin >> fil;
     cout << "Columna : "; cin >> col;
-
+    
     int** A = CrearM(fil, col);
-    LlenarM(A, fil, col);
-    print(A, fil, col);
-
-    cout << "\n";
-
     int** At = CrearM(col, fil);
+    
+    LlenarM(A, fil, col);
     Transpuesta(A, At, fil, col);
+    
+    print(A, fil, col);
     print(At, col, fil);
-
-    for (int** p = A; p < A + fil; p++)
-        delete[] * p;
-    delete[] A;
-
-    for (int** p = At; p < At + col; p++)
-        delete[] * p;
-    delete[] At;
+    
+    Liberar(A, At, fil, col);
 }
