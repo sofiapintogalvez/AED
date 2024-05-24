@@ -1,3 +1,5 @@
+// Hacer la transpuesta de una matriz en memoria dinamica
+
 #include <iostream>
 
 using namespace std;
