@@ -29,7 +29,6 @@ void LlenarM(int** A, int f, int c)
 void Transpuesta(int** A, int** At, int f, int c)
 {
     int** matriz = A;
-    int** trans = At;
 
     while (matriz < A + f)
     {
