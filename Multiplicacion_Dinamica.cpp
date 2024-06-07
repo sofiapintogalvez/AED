@@ -1,29 +1,21 @@
+// Hacer la multiplicacion de matrices en memoria dinamica
+
 #include <iostream>
 
 using namespace std;
 
-int** CrearM(int f, int c) 
+int** CrearM(int f, int c)
 {
     int** A = new int* [f];
-    for (int **p = A; p < A + f; p++) 
+
+    for (int** p = A; p < A + f; p++)
         *p = new int[c];
-    
+
     return A;
 }
 
-void LlenarM(int** A, int f, int c) 
+void LlenarM(int** A, int f, int c)
 {
-    /*int i = 0;
-    for (int** p = A; p < A + f; p++, i++)
-    {
-        int j = 0;
-        for (int* q = *p; q < *p + c; q++, j++) 
-        {
-            cout << "Valor " << i << "-" << j << ": ";
-            cin >> *q;
-        }
-    }*/
-
     int x = 0;
     for (int** p = A; p < A + f; p++)
     {
@@ -35,36 +27,49 @@ void LlenarM(int** A, int f, int c)
     }
 }
 
-int** multiplyMatrices(int** A1, int** A2, int rows1, int cols1, int cols2) 
+void Vacio(int** A, int f, int c)
 {
-    int** A3 = CrearM(rows1, cols2);
-
-    for (int** p = A3; p < A3 + rows1; p++)
-    {
-        for (int* q = *p; q < *p + cols2; q++)
-        {
+    for (int** p = A; p < A + f; p++)
+        for (int* q = *p; q < *p + c; q++)
             *q = 0;
-        }
-    }
-
-    for (int i = 0; i < rows1; ++i) 
-    {
-        for (int j = 0; j < cols2; ++j) 
-        {
-            int* p = *(A3 + i) + j;
-            for (int k = 0; k < cols1; ++k) 
-            {
-                int* p1 = *(A1 + i) + k;
-                int* p2 = *(A2 + k) + j;
-                *p += (*p1) * (*p2);
-            }
-        }
-    }
-
-    return A3;
 }
 
-void print(int** A, int f, int c) 
+void Multi(int** A1, int** A2, int** A3, int m, int i, int n)
+{
+    int** fA1 = A1;
+    int* cA1 = *fA1;
+    int** fA2 = A2;
+    int** fA3 = A3;
+
+    while (fA1 < A1 + m)
+    {
+        int* cA2 = *fA2;
+        int* cA3 = *fA3;
+
+        while (cA3 < *fA3 + n)
+        {
+            *cA3 += (*cA1) * (*cA2);
+            cA2++;
+            cA3++;
+        }
+
+        if (cA3 == *fA3 + n)
+        {
+            cA1++;
+            fA2++;
+        }
+
+        if (cA1 == *fA1 + i)
+        {
+            fA1++;
+            cA1 = *fA1;
+            fA2 = A2;
+            fA3++;
+        }
+    }
+}
+
+void print(int** A, int f, int c)
 {
     for (int** p = A; p < A + f; p++)
     {
@@ -75,14 +80,14 @@ void print(int** A, int f, int c)
     cout << endl;
 }
 
-void Liberar(int** A, int rows) 
+void Liberar(int** A, int filas)
 {
-    for (int** p = A; p < A + rows; p++)
+    for (int** p = A; p < A + filas; p++)
         delete[] * p;
     delete[] A;
 }
 
-int main() 
+int main()
 {
     int m, i, n;
 
@@ -90,23 +95,23 @@ int main()
     cout << "I: "; cin >> i;
     cout << "N: "; cin >> n;
 
+    cout << endl;
+
     int** A1 = CrearM(m, i);
     int** A2 = CrearM(i, n);
+    int** A3 = CrearM(m, n);
 
-    cout << "\nPrimera matriz\n";
     LlenarM(A1, m, i);
-    print(A1, m, i);
-
-    cout << "\nSegunda matriz\n";
     LlenarM(A2, i, n);
+    Vacio(A3, m, n);
+
+    Multi(A1, A2, A3, m, i, n);
+
+    print(A1, m, i);
     print(A2, i, n);
-
-    int** A3 = multiplyMatrices(A1, A2, m, i, n);
-
-    cout << "\nRespuesta\n";
     print(A3, m, n);
 
     Liberar(A1, m);
     Liberar(A2, i);
-    Liberar(A3, n);
+    Liberar(A3, m);
 }
