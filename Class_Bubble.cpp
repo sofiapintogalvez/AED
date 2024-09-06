@@ -6,18 +6,14 @@ template <class T>
 struct ASC
 {
 	bool operator()(T a, T b)
-	{
-		return a > b;
-	}
+	{   return a > b;   }
 };
 
 template <class T>
 struct DESC
 {
 	bool operator()(T a, T b)
-	{
-		return a < b;
-	}
+	{	return a < b;   }
 };
 
 template <class T, class O>
@@ -45,7 +41,7 @@ struct bubble
 
 int main()
 {
-	bubble<int, ASC<int>> b;
+	bubble<int, ASC<int> > b;
 
 	int A[6] = { 6,5,4,3,2,1 };
 
