@@ -1,4 +1,4 @@
-// Hacer 2 listas enlazadas ordenadas y sin repeticiones, método merge que une ambas en orden en la lista 1
+// Hacer 2 listas enlazadas ordenadas y sin repeticiones, método merge que une ambas en orden en la lista 2
 
 #include <iostream>
 
@@ -54,46 +54,44 @@ void LE<T>::add(T valor)
 template <class T>
 void LE<T>::merge(nodo<T>*& h1, nodo<T>*& h2)
 {
-    nodo<T>* p = h1;
-    nodo<T>* q = h2;
-    nodo<T>* r = NULL;
+    nodo<int>* p1, * p2, * pf;
+    p1 = h1;
+    p2 = h2;
 
-    while (p && q)
+    if (h1->valor < h2->valor)
     {
-
-        if (p->valor < q->valor)
-        {
-
-            if (p->valor != h1->valor)
-                r->next = p;
-            else
-                r = p;
-
-            r = p;
-            p = p->next;
-        }
-        else
-        {
-
-            if (q->valor == h2->valor)
-            {
-                r = q;
-                h1 = q;
-                q = q->next;
-            }
-            else
-            {
-                r->next = q;
-                r = q;
-                q = q->next;
-            }
-        }
-        if (!q)
-            r->next = p;
-        else
-            r->next = q;
+        h2 = h1;
+        pf = p1;
+        p1 = p1->next;
     }
-    h2 = NULL;
+    else
+    {
+        pf = p2;
+        p2 = p2->next;
+    }
+
+    while (p1 && p2)
+    {
+        if (p1->valor < p2->valor)
+        {
+            pf->next = p1;
+            p1 = p1->next;
+            pf = pf->next;
+        }
+        else
+        {
+            pf->next = p2;
+            p2 = p2->next;
+            pf = pf->next;
+        }
+    }
+
+    if (p1)
+        pf->next = p1;
+    else
+        pf->next = p2;
+
+    h1 = 0;
 }
 
 template <class T>
@@ -136,5 +134,5 @@ int main()
 
     H1.merge(H1.head, H2.head);
     cout << "Merge\n";
-    H1.print();
+    H2.print();
 }
