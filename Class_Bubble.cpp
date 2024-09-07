@@ -41,7 +41,7 @@ struct bubble
 
 int main()
 {
-	bubble<int, ASC<int> > b;
+	bubble<int, ASC<int>> b;
 
 	int A[6] = { 6,5,4,3,2,1 };
 
