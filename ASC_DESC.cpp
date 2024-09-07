@@ -41,6 +41,7 @@ public:
     nodo<T>* head = NULL;
     bool find(T valor, nodo<T>*& pos);
     void add(T valor);
+    void del(T valor);
     void print();
     ~LE();
 };
@@ -67,6 +68,27 @@ void LE<T, O>::add(T valor)
             head = new nodo<T>(valor, head);
         else
             pos->next = new nodo<T>(valor, pos->next);
+}
+
+template <class T, class O>
+void LE<T, O>::del(T valor)
+{
+    nodo<T>* pos_ant, * pos_del;
+    if (find(valor, pos_ant))
+    {
+        if (pos_ant)
+        {
+            pos_del = pos_ant->next;
+            pos_ant->next = pos_del->next;
+            delete pos_del;
+        }
+        else
+        {
+            pos_del = head;
+            head = pos_del->next;
+            delete pos_del;
+        }
+    }
 }
 
 template <class T, class O>
@@ -101,5 +123,8 @@ int main()
     Lista_entera.add(2);
     Lista_entera.add(5);
     Lista_entera.add(1);
+    Lista_entera.print();
+
+    Lista_entera.del(4);
     Lista_entera.print();
 }
