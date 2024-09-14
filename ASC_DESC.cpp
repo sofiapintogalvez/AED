@@ -114,17 +114,16 @@ LE<T, O>::~LE()
 
 int main()
 {
-    LE<int, ASC<int>> Lista_entera;
-    //LE<char, DESC<char>> Lista_chars;
+    LE<int, ASC<int>> Lista;
 
-    cout << "Lista entera ASC\n";
-    Lista_entera.add(3);
-    Lista_entera.add(4);
-    Lista_entera.add(2);
-    Lista_entera.add(5);
-    Lista_entera.add(1);
-    Lista_entera.print();
+    cout << "Lista ASC\n";
+    Lista.add(3);
+    Lista.add(4);
+    Lista.add(2);
+    Lista.add(5);
+    Lista.add(1);
+    Lista.print();
 
-    Lista_entera.del(4);
-    Lista_entera.print();
+    Lista.del(4);
+    Lista.print();
 }
