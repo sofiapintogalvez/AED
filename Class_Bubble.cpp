@@ -43,10 +43,10 @@ int main()
 {
 	bubble<int, ASC<int>> b;
 
-	int A[6] = { 6,5,4,3,2,1 };
+	int A[10] = { 3,5,7,9,1,8,10,6,4,2 };
 
-	b(A, A + 5);
+	b(A, A + 9);
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 10; i++)
 		cout << A[i] << " ";
 }
