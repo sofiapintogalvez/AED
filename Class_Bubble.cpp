@@ -13,7 +13,7 @@ template <class T>
 struct DESC
 {
 	bool operator()(T a, T b)
-	{	return a < b;   }
+	{   return a < b;   }
 };
 
 template <class T, class O>
