@@ -1,4 +1,4 @@
-// Hacer head-pop y tail-push
+// Hacer head-pop y tail-push en una Cola
 
 #include <iostream>
 
@@ -17,19 +17,18 @@ struct nodo
 };
 
 template <class T>
-struct cola
+struct Cola
 {
     nodo<T>* head = NULL;
     nodo<T>* tail = NULL;
     void push(T valor);
     bool pop(T& valor);
-    bool empty();
     void print();
-    ~cola();
+    ~Cola();
 };
 
 template <class T>
-void cola<T>::push(T valor)
+void Cola<T>::push(T valor)
 {
     if (head == NULL && tail == NULL)
     {
@@ -44,7 +43,7 @@ void cola<T>::push(T valor)
 }
 
 template <class T>
-bool cola<T>::pop(T& valor)
+bool Cola<T>::pop(T& valor)
 {
     bool saque = false;
     valor = 0;
@@ -60,13 +59,7 @@ bool cola<T>::pop(T& valor)
 }
 
 template <class T>
-bool cola<T>::empty()
-{
-    return tail;
-}
-
-template <class T>
-void cola<T>::print()
+void Cola<T>::print()
 {
     cout << "head->";
     for (nodo<T>* p = head; p; p = p->next)
@@ -75,7 +68,7 @@ void cola<T>::print()
 }
 
 template <class T>
-cola<T>::~cola()
+Cola<T>::~Cola()
 {
     nodo<T>* tmp;
     while (head)
@@ -88,14 +81,20 @@ cola<T>::~cola()
 
 int main()
 {
-    cola<int> CL;
-
-    for (int i = 1; i <= 15; i++)
-        CL.push(i);
+    Cola<int> CL;
+    int popp = 0;
 
     CL.print();
 
-    int popp = 20;
+    CL.push(5);
+    CL.push(3);
+    CL.push(8);
+    CL.print();
+
+    CL.pop(popp);
+    CL.print();
+    CL.pop(popp);
+    CL.print();
     CL.pop(popp);
     CL.print();
 }
