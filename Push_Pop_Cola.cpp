@@ -84,13 +84,18 @@ int main()
     Cola<int> CL;
     int popp = 0;
 
+    cout << "VACIO\n";
     CL.print();
 
+    cout << "PUSH\n";
     CL.push(5);
+    CL.print();
     CL.push(3);
+    CL.print();
     CL.push(8);
     CL.print();
 
+    cout << "POP\n";
     CL.pop(popp);
     CL.print();
     CL.pop(popp);
