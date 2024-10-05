@@ -31,7 +31,7 @@ template <class T>
 void Pila<T>::push(T valor)
 {
     top = new nodo<T>(valor, top);
-    /*if (top == NULL)
+    /*if (!top)
         top = new nodo<T>(valor);
     else
     {
