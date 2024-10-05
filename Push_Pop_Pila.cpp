@@ -30,14 +30,15 @@ public:
 template <class T>
 void Pila<T>::push(T valor)
 {
-    if (top == NULL)
-        top = new nodo<T>(valor);         
+    top = new nodo<T>(valor, top);
+    /*if (top == NULL)
+        top = new nodo<T>(valor);
     else
     {
         nodo<T>* temp = new nodo<T>(valor);
         temp->next = top;
         top = temp;
-    }
+    }*/
 }
 
 template <class T>
