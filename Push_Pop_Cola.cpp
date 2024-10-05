@@ -30,7 +30,7 @@ struct Cola
 template <class T>
 void Cola<T>::push(T valor)
 {
-    if (head == NULL && tail == NULL)
+    if (!head && !tail)
     {
         head = new nodo<T>(valor);
         tail = head;
