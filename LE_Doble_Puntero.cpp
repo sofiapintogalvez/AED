@@ -8,7 +8,7 @@ struct Node
 {
     int v;
     Node* next;
-    Node(int x)
+    Node (int x)
     {
         v = x;
         next = NULL;
