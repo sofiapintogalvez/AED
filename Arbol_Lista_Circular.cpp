@@ -1,3 +1,5 @@
+// Convertir un arbol a una lista circular
+
 #include <iostream>
 
 using namespace std;
