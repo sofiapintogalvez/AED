@@ -1,3 +1,5 @@
+// Grafico de un arbol binario con GLUT (tambien usar SMFL)
+
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
