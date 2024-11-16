@@ -115,7 +115,7 @@ void BinTree::dibujarArbol(Node* nodo, float x, float y, float offsetX, float of
     string textoValor = to_string(nodo->v);
     for (char c : textoValor) glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
 
-    // Dibujar lÌneas y recursiÛn
+    // Dibujar l√≠neas y recursi√≥n
     if (nodo->node[0]) {
         glBegin(GL_LINES);
         glVertex2f(x, y);
@@ -171,7 +171,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Contorno del ¡rbol Binario");
+    glutCreateWindow("Contorno del √Årbol Binario");
 
     glClearColor(1.0, 1.0, 1.0, 1.0);
     gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
