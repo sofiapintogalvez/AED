@@ -126,14 +126,14 @@ void BinTree::dibujarArbol(Node* nodo, float x, float y, float offsetX, float of
 {
     if (!nodo) return;
 
-    // Determinar color del nodo seg˙n su nivel
+    // Determinar color del nodo seg√∫n su nivel
     bool resaltarActual = (nivel == nivelResaltado && nodo != hermano && nodo->v != objetivo);
     bool resaltarPrimos = (nivel == nivelPadre && nodo != padre);
 
     if (resaltarActual)
         glColor3f(1.0f, 0.5f, 0.0f);  // Naranja
     else if (resaltarPrimos)
-        glColor3f(0.5f, 0.0f, 1.0f);  // P˙rpura
+        glColor3f(0.5f, 0.0f, 1.0f);  // P√∫rpura
     else
         glColor3f(0.0f, 0.8f, 0.2f);  // Verde
 
@@ -143,7 +143,7 @@ void BinTree::dibujarArbol(Node* nodo, float x, float y, float offsetX, float of
     string textoValor = to_string(nodo->v);
     for (char c : textoValor) glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
 
-    // Dibujar lÌneas y recursiÛn
+    // Dibujar l√≠neas y recursi√≥n
     if (nodo->node[0]) {
         glBegin(GL_LINES);
         glVertex2f(x, y);
@@ -210,7 +210,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("¡rbol Binario");
+    glutCreateWindow("√Årbol Binario");
 
     glClearColor(1.0, 1.0, 1.0, 1.0);
     gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
