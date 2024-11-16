@@ -1,3 +1,5 @@
+// Hacer grafico de un arbol donde pinte los tios y sobrinos de un numero ingresado de diferente color
+
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
