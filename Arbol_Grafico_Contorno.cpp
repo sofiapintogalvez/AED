@@ -1,3 +1,5 @@
+// Hacer grafico de un arbol donde coloree los nodos del contorno de otro color
+
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
