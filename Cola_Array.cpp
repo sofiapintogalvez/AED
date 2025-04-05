@@ -79,6 +79,7 @@ void Cola<T>::print()
         }
         cout << "tail" << endl;
     }
+    cout << "----------------------------------------------------" << endl;
 }
 
 int main()
