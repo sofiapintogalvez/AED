@@ -48,12 +48,12 @@ void Cola<T>::push(T valor)
 template <class T>
 bool Cola<T>::pop(T& valor)
 {
-    bool saque = true;
+    bool saque = false;
     valor = *head;
     if (head)
     {
         cout << valor << endl;
-        saque = false;
+        saque = true;
         head++;
     }
     return saque;
