@@ -69,12 +69,12 @@ void Cola<T>::print()
     else
     {
         cout << "head->";
-        for(int* p = head; p < fin; p++)
+        for(T* p = head; p < fin; p++)
             cout << *p << "->";
     
         if(tail != elem + 9)
         {
-            for(int* q = tail; q < top; q++)
+            for(T* q = tail; q < top; q++)
                 cout << *q << "->";
         }
         cout << "tail" << endl;
