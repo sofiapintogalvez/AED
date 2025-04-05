@@ -56,7 +56,6 @@ void Pila<T>::print()
     cout << "top" << endl;
     for (int* p = top; p >= elem; p--)
         cout << *p << endl;
-    cout << "null" << endl;
     cout << "--------------------------------------------------" << endl;
 }
 
