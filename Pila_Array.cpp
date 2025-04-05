@@ -40,9 +40,10 @@ template <class T>
 bool Pila<T>::pop(T& valor)
 {
     bool saque = false;
-    valor = 0;
+    valor = *top;
     if(top)
     {
+        cout << valor << endl;
         saque = true;
         top--;
     }
