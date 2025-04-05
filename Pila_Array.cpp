@@ -52,10 +52,11 @@ bool Pila<T>::pop(T& valor)
 template <class T>
 void Pila<T>::print()
 {
-    cout << "top->";
-    for(int* p = top; p >= elem; p--)
-        cout << *p << "->";
+    cout << "top" << endl;
+    for (int* p = top; p >= elem; p--)
+        cout << *p << endl;
     cout << "null" << endl;
+    cout << "--------------------------------------------------" << endl;
 }
 
 int main()
