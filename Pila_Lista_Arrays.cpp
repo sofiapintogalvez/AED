@@ -9,7 +9,7 @@ struct Nodo
 {
 	T ar[5];
 	Nodo<T>* next;
-    T* top = nullptr;
+	T* top = nullptr;
 
 	Nodo(Nodo<T>* n = nullptr)
 	{
