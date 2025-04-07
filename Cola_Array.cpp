@@ -49,9 +49,9 @@ template <class T>
 bool Cola<T>::pop(T& valor)
 {
     bool saque = false;
-    valor = *head;
     if (head)
     {
+        valor = *head;
         cout << valor << endl;
         saque = true;
         head++;
