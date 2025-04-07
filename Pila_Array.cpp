@@ -41,7 +41,7 @@ bool Pila<T>::pop(T& valor)
 {
     bool saque = false;
     valor = *top;
-    if(top)
+    if(top >= elem)
     {
         cout << valor << endl;
         saque = true;
