@@ -26,6 +26,17 @@ class Pila
         void push(T valor);
         bool pop(T& valor);
         void print();
+
+	~Pila()
+        {
+            Nodo<T>* tmp;
+            while(head)
+            {
+                tmp = head;
+                head = head->next;
+                delete tmp;
+            }
+        }
 };
 
 template <class T>
@@ -86,9 +97,7 @@ void Pila<T>::print()
     for(Nodo<T>* p = head; p; p = p->next)
     {
         for(T* q = p->top; q >= p->ar; q--)
-        {
             cout << *q << endl;
-        }
     }
     cout << "-------------------------------------------" << endl;
 }
