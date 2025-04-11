@@ -69,7 +69,6 @@ template <class T>
 bool Pila<T>::pop(T& valor)
 {
     bool saque = false;
-    Nodo<T>* tmp = head;
     
     if(head->top >= head->ar)
     {
@@ -80,6 +79,7 @@ bool Pila<T>::pop(T& valor)
     }
     else
     {
+	Nodo<T>* tmp = head;
         head = head->next;
         delete tmp;
         valor = *(head->top);
