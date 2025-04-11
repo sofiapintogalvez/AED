@@ -9,8 +9,8 @@ struct Nodo
 {
 	T ar[5];
 	Nodo<T>* next;
-    T* head = nullptr;
-    T* tail = nullptr;
+    	T* head = nullptr;
+    	T* tail = nullptr;
 
 	Nodo(Nodo<T>* n = nullptr)
 	{
