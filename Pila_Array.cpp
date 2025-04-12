@@ -88,4 +88,6 @@ int main()
     pl.pop(x);
     cout << x << endl;
     pl.print();
+
+    return 0;
 }
