@@ -52,7 +52,7 @@ bool Cola<T>::pop(T& valor)
     if (head)
     {
         valor = *head;
-        cout << valor << endl;
+        //cout << valor << endl;
         saque = true;
         head++;
     }
@@ -102,8 +102,10 @@ int main()
 
     cout << "POP" << endl;
     cl.pop(x);
+    cout << x << endl;
     cl.print();
     cl.pop(x);
+    cout << x << endl;
     cl.print();
     
     cout << "PUSH" << endl;
