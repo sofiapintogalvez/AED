@@ -7,11 +7,9 @@ using namespace std;
 template <class T>
 class Cola
 {
-    T* top = nullptr;
     T elem[10];
     T* head = nullptr;
     T* tail = nullptr;
-    T* fin = nullptr;
 
     public:
         void push(T valor);
@@ -25,22 +23,19 @@ void Cola<T>::push(T valor)
     if(!head)
     {
         elem[0] = valor;
-        head = tail = top = elem;
-        fin = elem + 1;
+        head = tail = elem;
     }
     else
     {
         if(tail == elem + 9)
         {
-            *top = valor;
-            tail = top;
-            top++;
+            tail = elem;
+            *tail = valor;
         }
         else
         {
             tail++;
             *tail = valor;
-            fin++;
         }
     }
 }
@@ -49,10 +44,9 @@ template <class T>
 bool Cola<T>::pop(T& valor)
 {
     bool saque = false;
-    if (head)
+    if(head)
     {
         valor = *head;
-        //cout << valor << endl;
         saque = true;
         head++;
     }
@@ -63,21 +57,26 @@ template <class T>
 void Cola<T>::print()
 {
     if(!head)
-    {
         cout << "head->tail";
-    }
     else
     {
-        cout << "head->";
-        for(T* p = head; p < fin; p++)
-            cout << *p << "->";
-    
-        if(tail != elem + 9)
+        if(tail >= head)
         {
-            for(T* q = tail; q < top; q++)
-                cout << *q << "->";
+            cout << "head->";
+            for(T* p = head; p <= tail; p++)
+                cout << *p << "->";
+            cout << "tail" << endl;
         }
-        cout << "tail" << endl;
+        else
+        {
+            cout << "head->";
+            for(T* p = head; p < elem + 10; p++)
+                cout << *p << "->";
+
+            for(T* q = elem; q <= tail; q++)
+                cout << *q << "->";
+            cout << "tail" << endl;
+        }
     }
     cout << "----------------------------------------------------" << endl;
 }
@@ -104,6 +103,8 @@ int main()
     cl.pop(x);
     cout << x << endl;
     cl.print();
+
+    cout << "POP" << endl;
     cl.pop(x);
     cout << x << endl;
     cl.print();
@@ -111,4 +112,6 @@ int main()
     cout << "PUSH" << endl;
     cl.push(11);
     cl.print();
+
+    return 0;
 }
