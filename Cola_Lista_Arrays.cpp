@@ -86,7 +86,6 @@ bool Cola<T>::pop(T& valor)
     if(list->head < list->ar + 5)
     {
         valor = *(list->head);
-        cout << valor << endl;
         saque = true;
         list->head++;
     }
@@ -96,7 +95,6 @@ bool Cola<T>::pop(T& valor)
         list = list->next;
         delete tmp;
         valor = *(list->head);
-        cout << valor << endl;
         saque = true;
         list->head++;
     }
@@ -121,6 +119,7 @@ int main()
     Cola<int> cl;
     int x = 0;
 
+    cout << "PUSH" << endl;
     cl.push(1);
     cl.push(2);
     cl.push(3);
@@ -131,9 +130,18 @@ int main()
     cl.push(8);
     cl.print();
 
+    cout << "POP" << endl;
     cl.pop(x);
+    cout << x << endl;
     cl.print();
+
+    cout << "POP" << endl;
     cl.pop(x);
+    cout << x << endl;
+    cl.print();
+
+    cout << "PUSH" << endl;
+    cl.push(9);
     cl.print();
 
     return 0;
