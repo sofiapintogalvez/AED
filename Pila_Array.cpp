@@ -43,7 +43,6 @@ bool Pila<T>::pop(T& valor)
     if(top >= elem)
     {
         valor = *top;
-        cout << valor << endl;
         saque = true;
         top--;
     }
@@ -82,7 +81,11 @@ int main()
 
     cout << "POP" << endl;
     pl.pop(x);
+    cout << x << endl;
     pl.print();
+
+    cout << "POP" << endl;
     pl.pop(x);
+    cout << x << endl;
     pl.print();
 }
