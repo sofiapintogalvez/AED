@@ -73,7 +73,6 @@ bool Pila<T>::pop(T& valor)
     if(head->top >= head->ar)
     {
         valor = *(head->top);
-        cout << valor << endl;
         saque = true;
         head->top--;
     }
@@ -83,7 +82,6 @@ bool Pila<T>::pop(T& valor)
         head = head->next;
         delete tmp;
         valor = *(head->top);
-        cout << valor << endl;
         saque = true;
         head->top--;
     }
@@ -107,6 +105,10 @@ int main()
     Pila<int> pl;
     int x = 0;
 
+    cout << "VACIO" << endl;
+    pl.print();
+
+    cout << "PUSH" << endl;
     pl.push(7);
     pl.push(3);
     pl.push(5);
@@ -115,9 +117,14 @@ int main()
     pl.push(4);
     pl.print();
 
+    cout << "POP" << endl;
     pl.pop(x);
+    cout << x << endl;
     pl.print();
+
+    cout << "POP" << endl;
     pl.pop(x);
+    cout << x << endl;
     pl.print();
 
     return 0;
