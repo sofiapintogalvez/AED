@@ -54,7 +54,7 @@ template <class T>
 void Pila<T>::print()
 {
     cout << "top" << endl;
-    for (T* p = top; p >= elem; p--)
+    for(T* p = top; p >= elem; p--)
         cout << *p << endl;
     cout << "--------------------------------------------------" << endl;
 }
