@@ -28,7 +28,7 @@ class CForwardList
 		void push_front(T dato);
 		void pop_back();
 		void pop_front();
-        	T& operator[](int indice);
+        T& operator[](int indice);
 		void print();
 
         ~CForwardList()
@@ -55,12 +55,12 @@ template <class T>
 void CForwardList<T>::push_back(T data)
 {
 	if(!head)
-		head = new Nodo<T>(data, head);
+        head = new Nodo<T>(data, head);
 	else
 	{
-	        Nodo<T>* pos;
-	        fin(pos);
-	        pos->next = new Nodo<T>(data, pos->next);
+        Nodo<T>* pos;
+        fin(pos);
+        pos->next = new Nodo<T>(data, pos->next);
 	}
 }
 
@@ -68,7 +68,7 @@ template <class T>
 void CForwardList<T>::push_front(T data)
 {
 	if(!head)
-        	head = new Nodo<T>(data, head);
+        head = new Nodo<T>(data, head);
 	else
 	{
 		Nodo<T>* tmp = new Nodo<T>(data, head);
@@ -143,14 +143,14 @@ int main()
 	fl.push_front(6);
 	fl.print();
 
-    	fl.pop_back();
+    fl.pop_back();
 	fl.print();
 
-    	fl.pop_front();
+    fl.pop_front();
 	fl.print();
 
-    	fl[2] = 0;
-    	fl.print();
+    fl[2] = 0;
+    fl.print();
 
-    	return 0;
+    return 0;
 }
