@@ -55,7 +55,7 @@ template <class T>
 void CForwardList<T>::push_back(T data)
 {
 	if(!head)
-        	head = new Nodo<T>(data, head);
+		head = new Nodo<T>(data, head);
 	else
 	{
 	        Nodo<T>* pos;
