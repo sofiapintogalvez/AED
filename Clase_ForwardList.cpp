@@ -115,7 +115,7 @@ template <class T>
 T& CForwardList<T>::operator[](int indice)
 {
     Nodo<T>* p = head;
-    for(int i = 1; i < indice; i++)
+    for(int i = 0; i < indice; i++)
         p = p->next;
 
     return p->valor;
@@ -134,22 +134,27 @@ int main()
 {
 	CForwardList<int> fl;
 
+	cout << "PUSH BACK" << endl;
 	fl.push_back(5);
 	fl.push_back(4);
 	fl.push_back(3);
 	fl.push_back(2);
 	fl.print();
 
+    cout << "PUSH FRONT" << endl;
 	fl.push_front(6);
 	fl.print();
 
+    cout << "POP BACK" << endl;
     fl.pop_back();
 	fl.print();
 
+    cout << "POP FRONT" << endl;
     fl.pop_front();
 	fl.print();
 
-    fl[2] = 0;
+    cout << "OPERATOR" << endl;
+    fl[1] = 0;
     fl.print();
 
     return 0;
