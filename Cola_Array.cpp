@@ -44,8 +44,15 @@ template <class T>
 bool Cola<T>::pop(T& valor)
 {
     bool saque = false;
-    if(head)
+    if(head < elem + 10)
     {
+        valor = *head;
+        saque = true;
+        head++;
+    }
+    else
+    {
+        head = elem;
         valor = *head;
         saque = true;
         head++;
