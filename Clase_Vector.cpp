@@ -135,6 +135,7 @@ int main()
 {
     CVector<int> v(4);
 
+    cout << "PUSH BACK" << endl;
     v.push_back(7);
     v.push_back(6);
     v.push_back(5);
@@ -142,17 +143,21 @@ int main()
     v.push_back(3);
     v.print();
 
+    cout << "PUSH FRONT" << endl;
     v.push_front(8);
     v.push_front(9);
     v.print();
 
+    cout << "POP BACK" << endl;
     v.pop_back();
     v.print();
 
+    cout << "POP FRONT" << endl;
     v.pop_front();
     v.print();
 
-    v[0] = 1;
+    cout << "OPERATOR" << endl;
+    v[1] = 0;
     v.print();
 
     return 0;
