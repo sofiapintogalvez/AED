@@ -118,6 +118,7 @@ int main()
     
     cout << "PUSH" << endl;
     cl.push(11);
+    cl.push(20);
     cl.print();
 
     return 0;
