@@ -60,7 +60,7 @@ void CForwardList<T>::push_back(T data)
 	{
         Nodo<T>* pos;
         fin(pos);
-        pos->next = new Nodo<T>(data, pos->next);
+        pos->next = new Nodo<T>(data);
 	}
 }
 
