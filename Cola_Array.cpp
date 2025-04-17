@@ -24,6 +24,7 @@ void Cola<T>::push(T valor)
     {
         elem[0] = valor;
         head = tail = elem;
+        tail++;
     }
     else
     {
@@ -31,11 +32,12 @@ void Cola<T>::push(T valor)
         {
             tail = elem;
             *tail = valor;
+            tail++;
         }
         else
         {
-            tail++;
             *tail = valor;
+            tail++;
         }
     }
 }
@@ -57,6 +59,10 @@ bool Cola<T>::pop(T& valor)
         saque = true;
         head++;
     }
+
+    if(head == tail)
+        head = tail = nullptr;
+    
     return saque;
 }
 
@@ -67,10 +73,10 @@ void Cola<T>::print()
         cout << "head->tail";
     else
     {
-        if(tail >= head)
+        if(tail > head)
         {
             cout << "head->";
-            for(T* p = head; p <= tail; p++)
+            for(T* p = head; p < tail; p++)
                 cout << *p << "->";
             cout << "tail" << endl;
         }
@@ -80,7 +86,7 @@ void Cola<T>::print()
             for(T* p = head; p < elem + 10; p++)
                 cout << *p << "->";
 
-            for(T* q = elem; q <= tail; q++)
+            for(T* q = elem; q < tail; q++)
                 cout << *q << "->";
             cout << "tail" << endl;
         }
