@@ -50,7 +50,7 @@ void CList<T>::push_back(T data)
 {
 	if(!head)
     {
-        head = new Nodo<T>(data, tail, tail);
+        head = new Nodo<T>(data);
         tail = head;
     }
 	else
@@ -65,7 +65,7 @@ void CList<T>::push_front(T data)
 {
 	if(!head)
     {
-        head = new Nodo<T>(data, tail, tail);
+        head = new Nodo<T>(data);
         tail = head;
     }
 	else
