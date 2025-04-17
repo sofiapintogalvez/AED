@@ -67,13 +67,8 @@ void CForwardList<T>::push_back(T data)
 template <class T>
 void CForwardList<T>::push_front(T data)
 {
-	if(!head)
-        head = new Nodo<T>(data, head);
-	else
-	{
-		Nodo<T>* tmp = new Nodo<T>(data, head);
-		head = tmp;
-	}
+	Nodo<T>* tmp = new Nodo<T>(data, head);
+	head = tmp;
 }
 
 template <class T>
