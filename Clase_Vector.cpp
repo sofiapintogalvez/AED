@@ -97,7 +97,7 @@ void CVector<T>::push_front(T valor)
 template <class T>
 void CVector<T>::pop_back()
 {
-    if(ptr >= ar)
+    if(ptr > ar)
         ptr--;
     else
         ptr = ar;
@@ -106,7 +106,7 @@ void CVector<T>::pop_back()
 template <class T>
 void CVector<T>::pop_front()
 {
-    if(ptr)
+    if(ptr > ar)
     {
         for(T* i = ar + 1; i < ptr; i++)
             *(i-1) = *i;
