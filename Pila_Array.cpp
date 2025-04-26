@@ -21,8 +21,8 @@ void Pila<T>::push(T valor)
 {
     if(!top)
     {
-        elem[0] = valor;
         top = elem;
+        *top = valor;
     }
     else
     {
