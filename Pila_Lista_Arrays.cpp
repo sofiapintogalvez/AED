@@ -45,8 +45,8 @@ void Pila<T>::push(T valor)
     if(!head)
     {
         head = new Nodo<T>(head);
-        head->ar[0] = valor;
         head->top = head->ar;
+	*(head->top) = valor;
     }
     else
     {
