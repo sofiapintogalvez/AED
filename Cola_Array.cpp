@@ -22,8 +22,8 @@ void Cola<T>::push(T valor)
 {
     if(!head)
     {
-        elem[0] = valor;
         head = tail = elem;
+        *tail = valor;
         tail++;
     }
     else
