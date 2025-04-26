@@ -81,9 +81,15 @@ bool Pila<T>::pop(T& valor)
 	Nodo<T>* tmp = head;
         head = head->next;
         delete tmp;
-        valor = *(head->top);
-        saque = true;
-        head->top--;
+	    
+        if (head == nullptr)
+            return false;
+        else
+        {
+            valor = *(head->top);
+            saque = true;
+            head->top--;
+        }
     }
     return saque;
 }
