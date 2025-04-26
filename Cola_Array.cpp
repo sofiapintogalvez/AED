@@ -28,7 +28,7 @@ void Cola<T>::push(T valor)
     }
     else
     {
-        if(tail == elem + 9)
+        if(tail == elem + 10)
         {
             tail = elem;
             *tail = valor;
