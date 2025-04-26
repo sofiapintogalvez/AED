@@ -55,8 +55,8 @@ void Cola<T>::push(T valor)
     if(!list)
     {
         list = new Nodo<T>(list);
-        list->ar[0] = valor;
         list->head = list->tail = list->ar;
+	*(list->tail) = valor;
     }
     else
     {
@@ -94,9 +94,15 @@ bool Cola<T>::pop(T& valor)
         Nodo<T>* tmp = list;
         list = list->next;
         delete tmp;
-        valor = *(list->head);
-        saque = true;
-        list->head++;
+
+	if(list == nullptr)
+            return false;
+        else
+        {
+            valor = *(list->head);
+            saque = true;
+            list->head++;
+        }
     }
     return saque;
 }
