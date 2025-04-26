@@ -82,7 +82,7 @@ bool Pila<T>::pop(T& valor)
         head = head->next;
         delete tmp;
 	    
-        if (head == nullptr)
+        if(head == nullptr)
             return false;
         else
         {
