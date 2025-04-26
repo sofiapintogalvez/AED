@@ -46,6 +46,9 @@ bool Pila<T>::pop(T& valor)
         saque = true;
         top--;
     }
+    else
+        top = nullptr;
+    
     return saque;
 }
 
