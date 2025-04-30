@@ -41,6 +41,8 @@ class CList
                 tmp = head;
                 head = head->next;
                 delete tmp;
+		if(head)
+                    head->prev = nullptr;
             }
         }
 };
@@ -86,7 +88,10 @@ void CList<T>::pop_back()
         Nodo<T>* tmp = tail;
         tail = tail->prev;
         delete tmp;
-        tail->next = nullptr;
+        if(tail)
+            tail->next = nullptr;
+        else
+            head = nullptr;
     }
 }
 
@@ -100,7 +105,8 @@ void CList<T>::pop_front()
         Nodo<T>* tmp = head;
         head = head->next;
         delete tmp;
-        head->prev = nullptr;
+        if(head)
+            head->prev = nullptr;
     }
 }
 
