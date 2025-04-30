@@ -54,19 +54,19 @@ void LE<T>::add(T valor)
 template <class T>
 void LE<T>::merge(nodo<T>*& h1, nodo<T>*& h2)
 {
-    nodo<int>* p1, * p2, * pf;
-    p1 = h1;
-    p2 = h2;
+    nodo<int>* p1 = h1;
+    nodo<int>* p2 = h2;
+    nodo<int>* ante;
 
     if (h1->valor < h2->valor)
     {
         h2 = h1;
-        pf = p1;
+        ante = p1;
         p1 = p1->next;
     }
     else
     {
-        pf = p2;
+        ante = p2;
         p2 = p2->next;
     }
 
@@ -74,22 +74,22 @@ void LE<T>::merge(nodo<T>*& h1, nodo<T>*& h2)
     {
         if (p1->valor < p2->valor)
         {
-            pf->next = p1;
+            ante->next = p1;
             p1 = p1->next;
-            pf = pf->next;
+            ante = ante->next;
         }
         else
         {
-            pf->next = p2;
+            ante->next = p2;
             p2 = p2->next;
-            pf = pf->next;
+            ante = ante->next;
         }
     }
 
     if (p1)
-        pf->next = p1;
+        ante->next = p1;
     else
-        pf->next = p2;
+        ante->next = p2;
 
     h1 = 0;
 }
