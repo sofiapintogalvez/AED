@@ -87,11 +87,11 @@ void CList<T>::pop_back()
     {
         Nodo<T>* tmp = tail;
         tail = tail->prev;
-        delete tmp;
         if(tail)
             tail->next = nullptr;
         else
             head = nullptr;
+        delete tmp;
     }
 }
 
@@ -104,9 +104,11 @@ void CList<T>::pop_front()
     {
         Nodo<T>* tmp = head;
         head = head->next;
-        delete tmp;
         if(head)
             head->prev = nullptr;
+        else
+            tail = nullptr;
+        delete tmp;
     }
 }
 
