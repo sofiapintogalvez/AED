@@ -33,7 +33,7 @@ bool BinTree::find(int x, Node**& p)
     p = &root;
     while (*p && (*p)->v != x)
     {
-        p = &((*p)->node[(*p)->v < x]);
+        p = &((*p)->node[x > (*p)->v]);
     }
     return *p;
 }
