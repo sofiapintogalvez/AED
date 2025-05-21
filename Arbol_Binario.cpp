@@ -197,4 +197,6 @@ int main()
 
     t.rem(52);
     t.print();
+
+    return 0;
 }
