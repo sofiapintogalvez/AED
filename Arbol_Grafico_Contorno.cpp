@@ -58,9 +58,9 @@ bool BinTree::find(int x, Node**& p)
 bool BinTree::ins(int x)
 {
     Node** p;
-    if(find(x, p)) return false;
+    if(find(x, p)) return 0;
     *p = new Node(x);
-    return true;
+    return 1;
 }
 
 bool BinTree::rem(int x)
