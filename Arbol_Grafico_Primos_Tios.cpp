@@ -7,11 +7,26 @@
 
 using namespace std;
 
+void drawCircle(float x, float y, float radius)
+{
+    int segments = 100;
+    float angleStep = 360.0f / segments;
+
+    glBegin(GL_TRIANGLE_FAN);
+    for (int i = 0; i <= segments; i++) {
+        float angle = angleStep * i;
+        float radian = angle * (3.14159265f / 180.0f);
+        glVertex2f(x + cos(radian) * radius, y + sin(radian) * radius);
+    }
+    glEnd();
+}
+
 struct Node
 {
     int v;
     Node* node[2];
-    Node(int x) {
+    Node(int x) 
+    {
         v = x;
         node[0] = node[1] = nullptr;
     }
@@ -20,6 +35,7 @@ struct Node
 struct BinTree
 {
     Node* root = nullptr;
+    bool m_b = 0;
     bool find(int x, Node**& p);
     bool ins(int x);
     Node** rep(Node** q);
@@ -35,41 +51,45 @@ struct BinTree
 bool BinTree::find(int x, Node**& p)
 {
     p = &root;
-    while (*p && (*p)->v != x) {
-        p = &((*p)->node[(*p)->v < x]);
-    }
-    return *p;
+    while(*p && (*p)->v != x)
+        p = &((*p)->node[x > (*p)->v]);
+    
+    return *p != nullptr;
 }
 
 bool BinTree::ins(int x)
 {
     Node** p;
-    if (find(x, p)) return false;
+    if(find(x, p)) return 0;
     *p = new Node(x);
-    return true;
-}
-
-Node** BinTree::rep(Node** q)
-{
-    q = &((*q)->node[1]);
-    while ((*q)->node[0])
-        q = &((*q)->node[0]);
-    return q;
+    return 1;
 }
 
 bool BinTree::rem(int x)
 {
     Node** p;
-    if (!find(x, p)) return false;
-    if ((*p)->node[0] && (*p)->node[1]) {
+    if (!find(x, p)) return 0;
+    // CASO 2
+    if ((*p)->node[0] && (*p)->node[1])
+    {
         Node** q = rep(p);
         (*p)->v = (*q)->v;
         p = q;
     }
+    // CASO 0 y 1
     Node* t = *p;
-    *p = (*p)->node[(*p)->node[1] != nullptr];
+    *p = (*p)->node[(*p)->node[1] != 0];
     delete t;
-    return true;
+    return 1;
+}
+
+Node** BinTree::rep(Node** q)
+{
+    q = &((*q)->node[m_b]);
+    while ((*q)->node[!m_b])
+        q = &((*q)->node[!m_b]);
+    m_b = !m_b;
+    return q;
 }
 
 void BinTree::InOrder(Node* n)
@@ -88,45 +108,35 @@ void BinTree::print()
 
 int BinTree::obtenerNivel(Node* nodo, int valor, int nivel)
 {
-    if (!nodo) return -1;
-    if (nodo->v == valor) return nivel;
+    if(!nodo) 
+        return -1;
+    if(nodo->v == valor) 
+        return nivel;
 
     int nivelIzquierdo = obtenerNivel(nodo->node[0], valor, nivel + 1);
-    if (nivelIzquierdo != -1) return nivelIzquierdo;
+    if(nivelIzquierdo != -1) 
+        return nivelIzquierdo;
 
     return obtenerNivel(nodo->node[1], valor, nivel + 1);
 }
 
 Node* BinTree::obtenerPadre(Node* nodo, int valor)
 {
-    if (!nodo || nodo->v == valor) return nullptr;
-    if ((nodo->node[0] && nodo->node[0]->v == valor) || (nodo->node[1] && nodo->node[1]->v == valor)) {
+    if(!nodo || nodo->v == valor) 
+        return nullptr;
+    if((nodo->node[0] && nodo->node[0]->v == valor) || (nodo->node[1] && nodo->node[1]->v == valor))
         return nodo;
-    }
 
     Node* padreIzquierdo = obtenerPadre(nodo->node[0], valor);
-    if (padreIzquierdo) return padreIzquierdo;
+    if(padreIzquierdo) 
+        return padreIzquierdo;
 
     return obtenerPadre(nodo->node[1], valor);
 }
 
-void drawCircle(float x, float y, float radius)
-{
-    int segments = 100;
-    float angleStep = 360.0f / segments;
-
-    glBegin(GL_TRIANGLE_FAN);
-    for (int i = 0; i <= segments; i++) {
-        float angle = angleStep * i;
-        float radian = angle * (3.14159265f / 180.0f);
-        glVertex2f(x + cos(radian) * radius, y + sin(radian) * radius);
-    }
-    glEnd();
-}
-
 void BinTree::dibujarArbol(Node* nodo, float x, float y, float offsetX, float offsetY, int objetivo, int nivel, int nivelResaltado, int nivelPadre, Node* hermano, Node* padre)
 {
-    if (!nodo) return;
+    if(!nodo) return;
 
     // Determinar color del nodo según su nivel
     bool resaltarActual = (nivel == nivelResaltado && nodo != hermano && nodo->v != objetivo);
@@ -143,17 +153,19 @@ void BinTree::dibujarArbol(Node* nodo, float x, float y, float offsetX, float of
     glColor3f(0.0f, 0.0f, 0.0f);
     glRasterPos2f(x - 0.02f, y);
     string textoValor = to_string(nodo->v);
-    for (char c : textoValor) glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
+    for(char c : textoValor) glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
 
     // Dibujar líneas y recursión
-    if (nodo->node[0]) {
+    if(nodo->node[0])
+    {
         glBegin(GL_LINES);
         glVertex2f(x, y);
         glVertex2f(x - offsetX, y - offsetY);
         glEnd();
         dibujarArbol(nodo->node[0], x - offsetX, y - offsetY, offsetX * 0.5f, offsetY, objetivo, nivel + 1, nivelResaltado, nivelPadre, hermano, padre);
     }
-    if (nodo->node[1]) {
+    if(nodo->node[1]) 
+    {
         glBegin(GL_LINES);
         glVertex2f(x, y);
         glVertex2f(x + offsetX, y - offsetY);
@@ -165,7 +177,8 @@ void BinTree::dibujarArbol(Node* nodo, float x, float y, float offsetX, float of
 void BinTree::dibujarArbolColoreado(int objetivo)
 {
     int nivelObjetivo = obtenerNivel(root, objetivo, 0);
-    if (nivelObjetivo == -1) return;  // Objetivo no encontrado
+    if(nivelObjetivo == -1) 
+        return;  // Objetivo no encontrado
 
     Node* padre = obtenerPadre(root, objetivo);
     Node* hermano = (padre && padre->node[0] && padre->node[0]->v == objetivo) ? padre->node[1] :
@@ -182,7 +195,7 @@ void display()
 
     extern BinTree t;
     int objetivo;
-    cout << "Ingrese el numero a analizar: ";
+    cout << "Ingrese numero: ";
     cin >> objetivo;
     t.dibujarArbolColoreado(objetivo);
 
