@@ -1,0 +1,111 @@
+// Max y min heap de un arbol usando vector
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+template <class T>
+struct Greater
+{
+    bool operator()(T a, T b)
+    {
+        return a > b;
+    }
+};
+
+template <class T>
+struct Less
+{
+    bool operator()(T a, T b)
+    {
+        return a < b;
+    }
+};
+
+template <class T, class P>
+class Heap
+{
+    private:
+        vector<T> v;
+        P op;
+        int nelem = 0;
+
+    public:
+        void push(T valor)
+        { 
+            v.push_back(valor);
+            nelem++;
+            int i = v.size() - 1;
+            int padre = (i-1) / 2;
+
+            while(padre >= 0 && op(v[i], v[padre]))
+            {
+                swap(v[padre], v[i]);
+                i = padre;
+                padre = (i-1) / 2;
+            }
+        }
+
+        void pop()
+        { 
+            swap(v[0], v[nelem-1]);
+            nelem--;
+            int j = 0;
+            int h1 = (2*j) + 1;
+            int h2 = (2*j) + 2;
+            int m;
+
+            while((h1 <= nelem || h2 <= nelem) && (op(v[h1], v[j]) || op(v[h2], v[j])))
+            {
+                if(op(v[h1], v[h2]))
+                    m = h1;
+                else
+                    m = h2;
+
+                swap(v[j], v[m]);
+                j = m;
+                h1 = (2*j) + 1;
+                h2 = (2*j) + 2;
+            }
+        }
+
+        T MaxMin()
+        {
+            return v.front();
+        }
+        
+        void print()
+        { 
+            for(int i = 0; i < nelem; i++)
+                cout << v[i] << " ";
+            cout << endl;
+        }
+};
+
+int main()
+{
+    Heap<int, Greater<int>> MaxHeap;
+    //Heap<int, Less<int>> MinHeap;
+    
+    MaxHeap.push(42);
+    MaxHeap.push(25);
+    MaxHeap.push(38);
+    MaxHeap.push(23);
+    MaxHeap.push(22);
+    MaxHeap.push(11);
+    MaxHeap.push(32);
+    MaxHeap.push(15);
+    MaxHeap.push(21);
+    MaxHeap.push(26);
+    MaxHeap.print();
+
+    cout << "Numero mayor: " << MaxHeap.MaxMin() << endl;
+
+    MaxHeap.pop();
+    MaxHeap.print();
+    MaxHeap.pop();
+    MaxHeap.print();
+
+    return 0;
+}
