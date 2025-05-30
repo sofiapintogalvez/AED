@@ -53,14 +53,12 @@ bool BinTree::rem(int x)
 {
     Node** p;
     if(!find(x, p)) return 0;
-    // CASO 2
     if((*p)->node[0] && (*p)->node[1])
     {
         Node** q = rep(p);
         (*p)->v = (*q)->v;
         p = q;
     }
-    // CASO 0 y 1
     Node* t = *p;
     *p = (*p)->node[(*p)->node[1] != 0];
     delete t;
@@ -69,10 +67,10 @@ bool BinTree::rem(int x)
 
 Node** BinTree::rep(Node** q)
 {
-    q = &((*q)->node[m_b]);     // primero al hijo izquierdo m_b = 0 = izq
+    q = &((*q)->node[m_b]);
     while((*q)->node[!m_b])
-        q = &((*q)->node[!m_b]);    // se va al fondo derecha
-    m_b = !m_b;     // se cambia al hijo derecho m_b = 1 = der y asi alternando
+        q = &((*q)->node[!m_b]);
+    m_b = !m_b;
     return q;
 }
 
