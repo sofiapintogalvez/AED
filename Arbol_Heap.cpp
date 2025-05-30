@@ -112,8 +112,6 @@ int main()
 
     MaxHeap.pop();
     MaxHeap.print();
-    MaxHeap.pop();
-    MaxHeap.print();
 
     return 0;
 }
