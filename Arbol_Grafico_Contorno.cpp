@@ -27,8 +27,7 @@ struct BinTree
     bool rem(int x);
     void InOrder(Node* n);
     void print();
-    void dibujarArbol(Node* nodo, sf::RenderWindow& window, float x, float y, float offsetX, float offsetY,
-        bool esContornoIzquierdo, bool esContornoDerecho, sf::Font& font);
+    void dibujarArbol(Node* nodo, sf::RenderWindow& window, float x, float y, float offsetX, float offsetY, bool esContornoIzquierdo, bool esContornoDerecho, sf::Font& font);
     void dibujarContorno(sf::RenderWindow& window, sf::Font& font);
 };
 
