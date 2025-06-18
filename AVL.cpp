@@ -119,13 +119,13 @@ bool AVL::ins(int x)
         if(dif > 1 && x > n->node[1]->v)
             *actual = RR(n);
         
-        else if (dif < -1 && x < n->node[0]->v)
+        else if(dif < -1 && x < n->node[0]->v)
             *actual = LL(n);
         
-        else if (dif < -1 && x > n->node[0]->v)
+        else if(dif < -1 && x > n->node[0]->v)
             *actual = RL(n);
 
-        else if (dif > 1 && x < n->node[1]->v) 
+        else if(dif > 1 && x < n->node[1]->v) 
             *actual = LR(n);
     }
     return 1;
@@ -145,6 +145,28 @@ bool AVL::rem(int x)
     Node* t = *p;
     *p = (*p)->node[(*p)->node[1] != 0];
     delete t;
+
+    while(!s.empty()) 
+    {
+        Node** actual = s.top();
+        s.pop();
+
+        Node* n = *actual;
+        n->altura = max(getAltura(n->node[0]), getAltura(n->node[1])) + 1;
+        int dif = Diferencia(n);
+
+        if(dif > 1 && Diferencia(n->node[1]) >= 0)
+            *actual = RR(n);
+
+        else if(dif < -1 && Diferencia(n->node[0]) <= 0)
+            *actual = LL(n);
+
+        else if(dif < -1 && Diferencia(n->node[0]) > 0)
+            *actual = RL(n);
+
+        else if(dif > 1 && Diferencia(n->node[1]) < 0)
+            *actual = LR(n);
+    }
     return 1;
 }
 
@@ -178,6 +200,9 @@ int main()
     t.ins(51); t.ins(30); t.ins(20);
     t.ins(70); t.ins(90); t.ins(60);
 
+    t.print();
+
+    t.rem(20);
     t.print();
 
     return 0;
