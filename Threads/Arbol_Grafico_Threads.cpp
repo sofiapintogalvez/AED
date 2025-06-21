@@ -23,7 +23,6 @@ struct BinTree
 {
     Node* root = nullptr;
 
-    // Construye árbol recursivo para segmento [start,end]
     Node* buildTreeFromArraySegment(const vector<int>& arr, int start, int end)
     {
         int length = end - start + 1;
@@ -39,7 +38,6 @@ struct BinTree
         return parent;
     }
 
-    // Construye el árbol usando 4 threads
     void buildTreeFromArrayParallel(const vector<int>& arr)
     {
         int n = arr.size();
