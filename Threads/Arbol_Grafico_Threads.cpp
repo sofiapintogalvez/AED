@@ -1,3 +1,5 @@
+// Armar un arbol desde una array con 2^n elementos (sumando de par en par para sacar los padres de esos nodos) con 4 threads
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
