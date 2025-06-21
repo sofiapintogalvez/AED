@@ -23,70 +23,68 @@ struct BinTree
 {
     Node* root = nullptr;
 
-    Node* buildTreeFromArraySegment(const vector<int>& arr, int start, int end)
+    Node* HijosPadres(const vector<int>& arr, int start, int end)
     {
         int length = end - start + 1;
         if (length == 1)
             return new Node(arr[start]);
 
         int mid = start + length / 2 - 1;
-        Node* left = buildTreeFromArraySegment(arr, start, mid);
-        Node* right = buildTreeFromArraySegment(arr, mid + 1, end);
+        Node* left = HijosPadres(arr, start, mid);
+        Node* right = HijosPadres(arr, mid + 1, end);
         Node* parent = new Node(left->v + right->v);
         parent->node[0] = left;
         parent->node[1] = right;
         return parent;
     }
 
-    void buildTreeFromArrayParallel(const vector<int>& arr)
+    void arbolThread(const vector<int>& arr)
     {
         int n = arr.size();
         if (n == 0) return;
         if ((n & (n - 1)) != 0)
         {
-            cerr << "El tamaño del array debe ser potencia de 2" << endl;
+            cerr << "Tamaño invalido" << endl;
             return;
         }
         if (n < 4)
         {
-            root = buildTreeFromArraySegment(arr, 0, n - 1);
+            root = HijosPadres(arr, 0, n - 1);  // si hay menos de 4 elementos en el array no es necesario usar thread, de frente en secuencial
             return;
         }
 
-        int quarter = n / 4;
+        int partes = n / 4;
 
-        Node* roots[4] = { nullptr, nullptr, nullptr, nullptr };
+        Node* miniarboles[4] = { nullptr, nullptr, nullptr, nullptr };
         mutex mtx;
 
-        auto worker = [&](int idx)
+        auto th = [&](int idx)
         {
-            int start = idx * quarter;
-            int end = start + quarter - 1;
-            Node* subRoot = buildTreeFromArraySegment(arr, start, end);
+            int inicio = idx * partes;
+            int fin = inicio + partes - 1;
+            Node* nuevo = HijosPadres(arr, inicio, fin);
             lock_guard<mutex> lock(mtx);
-            roots[idx] = subRoot;
+            miniarboles[idx] = nuevo;
         };
 
         thread threads[4];
         for (int i = 0; i < 4; ++i)
-            threads[i] = thread(worker, i);
+            threads[i] = thread(th, i);
 
         for (int i = 0; i < 4; ++i)
             threads[i].join();
 
-        // Construir nivel intermedio
-        Node* leftParent = new Node(roots[0]->v + roots[1]->v);
-        leftParent->node[0] = roots[0];
-        leftParent->node[1] = roots[1];
+        Node* Pizq = new Node(miniarboles[0]->v + miniarboles[1]->v);
+        Pizq->node[0] = miniarboles[0];
+        Pizq->node[1] = miniarboles[1];
 
-        Node* rightParent = new Node(roots[2]->v + roots[3]->v);
-        rightParent->node[0] = roots[2];
-        rightParent->node[1] = roots[3];
+        Node* Pder = new Node(miniarboles[2]->v + miniarboles[3]->v);
+        Pder->node[0] = miniarboles[2];
+        Pder->node[1] = miniarboles[3];
 
-        // Raíz final
-        root = new Node(leftParent->v + rightParent->v);
-        root->node[0] = leftParent;
-        root->node[1] = rightParent;
+        root = new Node(Pizq->v + Pder->v);
+        root->node[0] = Pizq;
+        root->node[1] = Pder;
     }
 
     void drawTree(Node* n, sf::RenderWindow& window, float x, float y, float offsetX, float offsetY, sf::Font& font)
@@ -146,7 +144,7 @@ int main()
 
     vector<int> arr = { 14, 41, 36, 18, 25, 72, 89, 100 };
 
-    t.buildTreeFromArrayParallel(arr);
+    t.arbolThread(arr);
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "Árbol Binario SFML (4 Threads)");
     window.setFramerateLimit(60);
