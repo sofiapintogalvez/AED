@@ -13,8 +13,9 @@ struct Node
 {
     int v;
     Node* node[2];
-    Node(int x) : v(x)
+    Node(int x)
     {
+        v = x;
         node[0] = node[1] = nullptr;
     }
 };
