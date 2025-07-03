@@ -72,7 +72,10 @@ template <class T, class S, class F, int tam>
 void HashTable<T, S, F, tam>::print()
 {
     for(int i = 0; i < tam; i++)
+    {
+        cout << i << " -> ";
         ht[i].print();
+    }
     cout << endl;
 }
 
