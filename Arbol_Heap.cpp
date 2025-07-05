@@ -58,6 +58,7 @@ void Heap<T, P>::pop()
 {
     swap(v[0], v[nelem-1]);
     nelem--;
+    v.pop_back();
     int j = 0;
     int h1 = (2*j) + 1;
     int h2 = (2*j) + 2;
