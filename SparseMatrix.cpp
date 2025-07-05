@@ -135,16 +135,13 @@ int SMatrix::get(int x, int y)
 
 void SMatrix::print()
 {
-    for(int i = 0; i < Y.size(); i++)
+    for(int y = 0; y < Y.size(); y++)
     {
-        Node* p = Y[i];
-        for(int j = 0; j < X.size(); j++)
+        for(int x = 0; x < X.size(); x++)
         {
-            if(p && p->x == j)
-            {
-                cout << p->valor << " ";
-                p = p->right;
-            }
+            if(Y[y] && X[x])
+                cout << get(x, y) << " ";
+            
             else
                 cout << "0 ";
         }
